@@ -43,4 +43,21 @@ $(function () {
                 $('#search_helper').hide();
             })
     }
+
+
+
+    // 分享栏的隐藏与显示
+    var close = true;
+    $('#shareMore').click(function(){
+        if(close){
+            $(this).parent().width('200');
+            $('b').addClass('backword');
+            $(this).prevAll('a:lt(2)').show();
+        }else{
+            $(this).parent().width('155');
+            $('b').removeClass('backword');
+            $(this).prevAll('a:lt(2)').hide();
+        }
+        close = !close;
+    })
 })
