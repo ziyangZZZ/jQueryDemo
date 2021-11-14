@@ -14,6 +14,7 @@ $(function () {
             }
         )
     }
+
     secondMenu();
 
     // 二级菜单的显示与隐藏
@@ -26,5 +27,20 @@ $(function () {
                 $(this).children(':last').hide();
             }
         )
+    }
+
+    searchHelper();
+
+    // 搜索框功能
+    function searchHelper() {
+        $('#txtSearch').on('keyup focus', function () {
+                var txt = this.value.trim();
+                if (txt) {
+                    $('#search_helper').show();
+                }
+            })
+            .blur(function () {
+                $('#search_helper').hide();
+            })
     }
 })
