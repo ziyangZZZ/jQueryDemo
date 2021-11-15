@@ -90,4 +90,19 @@ $(function () {
             this.className = 'hover';
         })
     }
+
+    minicart();
+
+    // 迷你购物车
+    function minicart(){
+        $('#minicart').hover(
+            function(){
+                this.className = 'minicart';
+                $(this).children(':last').show();
+            },function(){
+                this.className = '';
+                $(this).children(':last').hide();
+            }
+        )
+    }
 })
