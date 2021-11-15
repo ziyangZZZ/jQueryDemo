@@ -48,12 +48,12 @@ $(function () {
 
     // 分享栏的隐藏与显示
     var close = true;
-    $('#shareMore').click(function(){
-        if(close){
+    $('#shareMore').click(function () {
+        if (close) {
             $(this).parent().width('200');
             $('b').addClass('backword');
             $(this).prevAll('a:lt(2)').show();
-        }else{
+        } else {
             $(this).parent().width('155');
             $('b').removeClass('backword');
             $(this).prevAll('a:lt(2)').hide();
@@ -64,19 +64,30 @@ $(function () {
     adddress();
 
     // 地址栏的显示与隐藏
-    function adddress(){
+    function adddress() {
         $('#store_select')
-        .hover(
-            function(){
-                $(this).children(':gt(0)').show();
-            },function(){
-                $(this).children(':gt(0)').hide();
-            }
-        )
-        .children(':last').click(
-            function(){
-                $('#store_select').children(':gt(0)').hide();
-            }
-        )
+            .hover(
+                function () {
+                    $(this).children(':gt(0)').show();
+                },
+                function () {
+                    $(this).children(':gt(0)').hide();
+                }
+            )
+            .children(':last').click(
+                function () {
+                    $('#store_select').children(':gt(0)').hide();
+                }
+            )
+    }
+
+    tabclick();
+
+    // 地址栏的切换
+    function tabclick() {
+        $('#store_tabs>li').click(function () {
+            $('#store_tabs>li').removeClass('hover');
+            this.className = 'hover';
+        })
     }
 })
