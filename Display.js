@@ -60,4 +60,23 @@ $(function () {
         }
         close = !close;
     })
+
+    adddress();
+
+    // 地址栏的显示与隐藏
+    function adddress(){
+        $('#store_select')
+        .hover(
+            function(){
+                $(this).children(':gt(0)').show();
+            },function(){
+                $(this).children(':gt(0)').hide();
+            }
+        )
+        .children(':last').click(
+            function(){
+                $('#store_select').children(':gt(0)').hide();
+            }
+        )
+    }
 })
