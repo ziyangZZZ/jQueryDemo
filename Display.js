@@ -125,4 +125,59 @@ $(function () {
             }
         )
     }
+
+    moveMiniImg();
+
+    // 移动小图
+    function moveMiniImg() {
+        //需要的变量
+        var $a = $('#preview>h1>a');
+        var $backward = $a.first();
+        var $forward = $a.last();
+        var $ul = $('#icon_list');
+        var showCount = 5;
+        var imgCount = $ul.children('li').length;
+        var moveCount = 0; //小图移动的次数，初始为0，向左为负，向右为正
+        var liWidth = $ul.children(':first').width();
+
+        if (imgCount > showCount) {
+            // 初始化
+            $forward.attr('class', 'forward');
+        }
+        $forward.click(
+            function () {
+                // 判断是否可以移动
+                if (moveCount === imgCount - showCount) {
+                    return;
+                }
+                moveCount++;
+                $backward.attr('class', 'backward');
+                // 判断右键是否应该成灰色
+                if (moveCount === imgCount - showCount) {
+                    $forward.attr('class', 'forward_disabled');
+                }
+                // 移动图片
+                $ul.css({
+                    left: -moveCount * liWidth
+                })
+            }
+        )
+
+        $backward.click(
+            function () {
+                if (moveCount === 0) {
+                    return;
+                }
+                moveCount--;
+                $forward.attr('class', 'forward');
+                if (moveCount === 0) {
+                    $backward.attr('class', 'backward_disabled');
+                }
+                $ul.css({
+                    left: -moveCount * liWidth
+                })
+            }
+        )
+
+    }
 })
