@@ -196,4 +196,87 @@ $(function () {
             }
         )
     }
+
+
+    bigImg();
+
+    // 放大镜
+    function bigImg() {
+        var $mediumImg = $('#mediumImg');
+        var $mask = $('#mask');
+        var $maskTop = $('#maskTop');
+        var $l_ImgContainer = $('#largeImgContainer');
+        var $loading = $('#lodading');
+        var $l_Img = $('#largeImg');
+        var maskWidth = $mask.width();
+        var maskHeight = $mask.height();
+        var maskTopWidth = $maskTop.width();
+        var maksTopHeight = $maskTop.height();
+
+        $maskTop.hover(
+            function () {
+                $mask.show();
+                var $src = $mediumImg.attr('src').replace('-m.', '-l.');
+                $l_Img.attr('src', $src);
+                $l_ImgContainer.show();
+                $l_Img.on('load', function () {
+                    // 获得大图的尺寸
+                    var largeWidth = $l_Img.width();
+                    var largeHeight = $l_Img.height();
+                    // 给大图的容器设置尺寸
+                    $l_ImgContainer.css({
+                        width:  largeWidth / 2,
+                        height: largeHeight / 2
+                    })
+                    // 让大图显示
+                    $l_Img.show();
+                    $loading.hide();
+                    $maskTop.mousemove(
+                        function (e) {
+                            //拿到它的坐标给mask重新定位
+                            var left = 0;
+                            var top = 0;
+                            var eLeft = e.offsetX;
+                            var eTop = e.offsetY;
+                            // var a = maskWidth/2;
+                            left = eLeft - maskWidth / 2;
+                            // left >=0 && left <= maskTopWidth - maskWidth
+                            top = eTop - maskHeight / 2;
+                            // top >=0 && top <= maskTopHeight - maskTopHeight
+                            if (left < 0) {
+                                left = 0
+                            } else if (left > maskTopWidth - maskWidth) {
+                                left = maskTopWidth - maskWidth
+                            }
+                            if (top < 0) {
+                                top = 0
+                            } else if (top > maksTopHeight - maskHeight) {
+                                top = maksTopHeight - maskHeight
+                            }
+                            // 让mask获得动态坐标
+                            $mask.css({
+                                left: left,
+                                top: top
+                            })
+                            // 得到大图的动态坐标
+
+                            left = -left * largeWidth / maskTopWidth;
+                            top = -top * largeHeight / maksTopHeight;
+                            $l_Img.css({
+                                left: left,
+                                top: top
+                            })
+                        })
+                })
+                //鼠标移动监听
+
+            },
+            function () {
+                // 当鼠标离开时，让大图及其容器，还有小黄块隐藏
+                $mask.hide();
+                $l_Img.hide();
+                $l_ImgContainer.hide();
+            }
+        )
+    }
 })
