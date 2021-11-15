@@ -178,6 +178,22 @@ $(function () {
                 })
             }
         )
+    }
 
+    hoverImg();
+
+    // 切换中图
+    function hoverImg() {
+        $('#icon_list>li').hover(
+            function () {
+                var $img = $(this).children();
+                $img.addClass('hoveredThumb');
+                var $src = $img.attr('src').replace('.jpg', '-m.jpg');
+                $('#mediumImg').attr('src', $src);
+            },
+            function () {
+                $(this).children().removeClass('hoveredThumb');
+            }
+        )
     }
 })
