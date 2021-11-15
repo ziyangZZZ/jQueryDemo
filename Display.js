@@ -94,14 +94,34 @@ $(function () {
     minicart();
 
     // 迷你购物车
-    function minicart(){
+    function minicart() {
         $('#minicart').hover(
-            function(){
+            function () {
                 this.className = 'minicart';
                 $(this).children(':last').show();
-            },function(){
+            },
+            function () {
                 this.className = '';
                 $(this).children(':last').hide();
+            }
+        )
+    }
+
+
+    productDetail();
+
+
+    //  产品介绍和详情
+    function productDetail() {
+        var $li = $('#product_detail>ul>li');
+        var $content = $('#product_detail>ul>div:gt(0)');
+        $li.click(
+            function () {
+                var index = $(this).index();
+                $li.removeClass('current');
+                this.className = 'current';
+                $content.hide();
+                $content.eq(index).show();
             }
         )
     }
